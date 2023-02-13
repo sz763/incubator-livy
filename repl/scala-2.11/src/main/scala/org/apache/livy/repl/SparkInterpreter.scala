@@ -17,19 +17,16 @@
 
 package org.apache.livy.repl
 
+import org.apache.spark.SparkConf
+import org.apache.spark.repl.SparkILoop
+
 import java.io.File
 import java.net.{URL, URLClassLoader}
 import java.nio.file.{Files, Paths}
-
 import scala.tools.nsc.Settings
-import scala.tools.nsc.interpreter.Completion.ScalaCompleter
-import scala.tools.nsc.interpreter.IMain
-import scala.tools.nsc.interpreter.JLineCompletion
-import scala.tools.nsc.interpreter.JPrintWriter
 import scala.tools.nsc.interpreter.Results.Result
+import scala.tools.nsc.interpreter.{JPrintWriter, PresentationCompilerCompleter}
 
-import org.apache.spark.SparkConf
-import org.apache.spark.repl.SparkILoop
 
 /**
  * This represents a Scala 2.11 Spark interpreter. It is not thread safe.
@@ -47,10 +44,10 @@ class SparkInterpreter(protected override val conf: SparkConf) extends AbstractS
     conf.set("spark.repl.class.outputDir", outputDir.getAbsolutePath)
 
     val settings = new Settings()
-    settings.processArguments(List("-Yrepl-class-based",
-      "-Yrepl-outdir", s"${outputDir.getAbsolutePath}"), true)
+    settings.processArguments(arguments = List("-Yrepl-class-based",
+      "-Yrepl-outdir", s"${outputDir.getAbsolutePath}"), processAll = true)
     settings.usejavacp.value = true
-    settings.embeddedDefaults(Thread.currentThread().getContextClassLoader())
+    settings.embeddedDefaults(Thread.currentThread().getContextClassLoader)
 
     sparkILoop = new SparkILoop(None, new JPrintWriter(outputStream, true))
     sparkILoop.settings = settings
@@ -64,7 +61,7 @@ class SparkInterpreter(protected override val conf: SparkConf) extends AbstractS
       while (classLoader != null) {
         if (classLoader.getClass.getCanonicalName ==
           "org.apache.spark.util.MutableURLClassLoader") {
-          val extraJarPath = classLoader.asInstanceOf[URLClassLoader].getURLs()
+          val extraJarPath = classLoader.asInstanceOf[URLClassLoader].getURLs
             // Check if the file exists. Otherwise an exception will be thrown.
             .filter { u => u.getProtocol == "file" && new File(u.getPath).isFile }
             // Livy rsc and repl are also in the extra jars list. Filter them out.
@@ -107,16 +104,8 @@ class SparkInterpreter(protected override val conf: SparkConf) extends AbstractS
     sparkILoop.interpret(code)
   }
 
-  override protected def completeCandidates(code: String, cursor: Int) : Array[String] = {
-    val completer : ScalaCompleter = {
-      try {
-        val cls = Class.forName("scala.tools.nsc.interpreter.PresentationCompilerCompleter")
-        cls.getDeclaredConstructor(classOf[IMain]).newInstance(sparkILoop.intp)
-          .asInstanceOf[ScalaCompleter]
-      } catch {
-        case e : ClassNotFoundException => new JLineCompletion(sparkILoop.intp).completer
-      }
-    }
+  override protected def completeCandidates(code: String, cursor: Int): Array[String] = {
+    val completer = new PresentationCompilerCompleter(sparkILoop.intp)
     completer.complete(code, cursor).candidates.toArray
   }
 
@@ -126,9 +115,9 @@ class SparkInterpreter(protected override val conf: SparkConf) extends AbstractS
   }
 
   override protected def bind(name: String,
-      tpe: String,
-      value: Object,
-      modifier: List[String]): Unit = {
+                              tpe: String,
+                              value: Object,
+                              modifier: List[String]): Unit = {
     sparkILoop.beQuietDuring {
       sparkILoop.bind(name, tpe, value, modifier)
     }

@@ -18,25 +18,16 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>org.apache.livy</groupId>
-  <artifactId>livy-repl_2.11</artifactId>
-  <version>0.8.0-incubating-SNAPSHOT</version>
-  <packaging>jar</packaging>
-
-  <parent>
-    <groupId>org.apache.livy</groupId>
-    <artifactId>livy-repl-parent</artifactId>
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>livy-repl_2.11</artifactId>
     <version>0.8.0-incubating-SNAPSHOT</version>
-    <relativePath>../pom.xml</relativePath>
-  </parent>
+    <packaging>jar</packaging>
 
-  <properties>
-    <scala.version>${scala-2.11.version}</scala.version>
-    <scala.binary.version>2.11</scala.binary.version>
-    <spark.version>${spark.scala-2.11.version}</spark.version>
-    <netty.version>${netty.spark-2.11.version}</netty.version>
-    <json4s.version>${json4s.spark-2.11.version}</json4s.version>
-  </properties>
+    <parent>
+        <groupId>org.apache.livy</groupId>
+        <artifactId>livy-repl-parent</artifactId>
+        <version>0.8.0-incubating-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
 
 </project>

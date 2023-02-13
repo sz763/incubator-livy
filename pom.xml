@@ -16,8 +16,8 @@
   ~ limitations under the License.
 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>org.apache.livy</groupId>
@@ -44,7 +44,8 @@
 
   <scm>
     <connection>scm:git:git@github.com:apache/incubator-livy.git</connection>
-    <developerConnection>scm:git:https://gitbox.apache.org/repos/asf/incubator-livy.git</developerConnection>
+    <developerConnection>scm:git:https://gitbox.apache.org/repos/asf/incubator-livy.git
+    </developerConnection>
     <url>scm:git:git@github.com:apache/incubator-livy.git</url>
     <tag>HEAD</tag>
   </scm>
@@ -81,9 +82,7 @@
     <asynchttpclient.version>2.10.1</asynchttpclient.version>
     <hadoop.version>2.7.3</hadoop.version>
     <hadoop.scope>compile</hadoop.scope>
-    <spark.scala-2.11.version>2.4.5</spark.scala-2.11.version>
-    <spark.scala-2.12.version>2.4.5</spark.scala-2.12.version>
-    <spark.version>${spark.scala-2.11.version}</spark.version>
+    <spark.version>3.1.1</spark.version>
     <hive.version>3.0.0</hive.version>
     <commons-codec.version>1.9</commons-codec.version>
     <httpclient.version>4.5.13</httpclient.version>
@@ -92,9 +91,7 @@
     <jackson-databind.version>2.12.7.1</jackson-databind.version>
     <javax.servlet-api.version>3.1.0</javax.servlet-api.version>
     <jetty.version>9.4.50.v20221201</jetty.version>
-    <json4s.spark-2.11.version>3.5.3</json4s.spark-2.11.version>
-    <json4s.spark-2.12.version>3.5.3</json4s.spark-2.12.version>
-    <json4s.version>${json4s.spark-2.11.version}</json4s.version>
+    <json4s.version>3.5.3</json4s.version>
     <junit.version>4.13.1</junit.version>
     <libthrift.version>0.9.3</libthrift.version>
     <kryo.version>4.0.2</kryo.version>
@@ -105,10 +102,8 @@
     <netty.version>${netty.spark-2.11.version}</netty.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <py4j.version>0.10.7</py4j.version>
-    <scala-2.11.version>2.11.12</scala-2.11.version>
-    <scala-2.12.version>2.12.10</scala-2.12.version>
-    <scala.binary.version>2.11</scala.binary.version>
-    <scala.version>${scala-2.11.version}</scala.version>
+    <scala.binary.version>2.12</scala.binary.version>
+    <scala.version>2.12.15</scala.version>
     <scalatest.version>3.0.8</scalatest.version>
     <scalatra.version>2.6.5</scalatra.version>
     <java.version>1.8</java.version>
@@ -205,7 +200,6 @@
     <module>client-common</module>
     <module>client-http</module>
     <module>core</module>
-    <module>core/scala-2.11</module>
     <module>core/scala-2.12</module>
     <module>coverage</module>
     <module>examples</module>
@@ -216,7 +210,6 @@
     <module>rsc</module>
     <module>scala</module>
     <module>scala-api</module>
-    <module>scala-api/scala-2.11</module>
     <module>scala-api/scala-2.12</module>
     <module>server</module>
     <module>test-lib</module>
@@ -639,7 +632,7 @@
         <plugin>
           <groupId>net.alchim31.maven</groupId>
           <artifactId>scala-maven-plugin</artifactId>
-          <version>4.2.0</version>
+          <version>4.3.0</version>
           <executions>
             <execution>
               <goals>
@@ -851,9 +844,9 @@
             </goals>
             <configuration>
               <target>
-                <delete file="${project.build.directory}/unit-tests.log" quiet="true" />
-                <delete dir="${project.build.directory}/jacoco" quiet="true" />
-                <delete dir="${project.build.directory}/tmp" quiet="true" />
+                <delete file="${project.build.directory}/unit-tests.log" quiet="true"/>
+                <delete dir="${project.build.directory}/jacoco" quiet="true"/>
+                <delete dir="${project.build.directory}/tmp" quiet="true"/>
               </target>
             </configuration>
           </execution>
@@ -866,7 +859,7 @@
             </goals>
             <configuration>
               <target>
-                <mkdir dir="${project.build.directory}/tmp" />
+                <mkdir dir="${project.build.directory}/tmp"/>
               </target>
             </configuration>
           </execution>
@@ -883,17 +876,17 @@
             <configuration>
               <target>
                 <copy file="${execution.root}/scalastyle.xml"
-                  tofile="${project.build.directory}/scalastyle.xml" />
+                  tofile="${project.build.directory}/scalastyle.xml"/>
                 <replace file="${project.build.directory}/scalastyle.xml"
                   token="{{COPYRIGHT_HEADER}}"
-                  value="${copyright.header}" />
+                  value="${copyright.header}"/>
                 <copy file="${execution.root}/checkstyle.xml"
-                  tofile="${project.build.directory}/checkstyle.xml" />
+                  tofile="${project.build.directory}/checkstyle.xml"/>
                 <echo file="${project.build.directory}/checkstyle.header"
-                  message="${copyright.header}" />
+                  message="${copyright.header}"/>
                 <replace file="${project.build.directory}/checkstyle.xml"
                   token="{{HEADER_FILE}}"
-                  value="${project.build.directory}/checkstyle.header" />
+                  value="${project.build.directory}/checkstyle.header"/>
               </target>
             </configuration>
           </execution>
@@ -1023,7 +1016,9 @@
             <configuration>
               <resourceBundles>
                 <resourceBundle>org.apache:apache-jar-resource-bundle:1.4</resourceBundle>
-                <resourceBundle>org.apache.apache.resources:apache-incubator-disclaimer-resource-bundle:1.2-SNAPSHOT</resourceBundle>
+                <resourceBundle>
+                  org.apache.apache.resources:apache-incubator-disclaimer-resource-bundle:1.2-SNAPSHOT
+                </resourceBundle>
               </resourceBundles>
             </configuration>
           </execution>
@@ -1061,21 +1056,17 @@
         </property>
       </activation>
       <properties>
-        <spark.scala-2.12.version>3.0.0</spark.scala-2.12.version>
-        <spark.scala-2.11.version>2.4.5</spark.scala-2.11.version>
-        <spark.version>${spark.scala-2.11.version}</spark.version>
+        <spark.version>3.1.1</spark.version>
         <netty.spark-2.12.version>4.1.86.Final</netty.spark-2.12.version>
         <netty.spark-2.11.version>4.1.86.Final</netty.spark-2.11.version>
-        <netty.version>${netty.spark-2.11.version}</netty.version>
+        <netty.version>${netty.spark-2.12.version}</netty.version>
         <java.version>1.8</java.version>
         <py4j.version>0.10.9</py4j.version>
-        <json4s.spark-2.11.version>3.5.3</json4s.spark-2.11.version>
-        <json4s.spark-2.12.version>3.6.6</json4s.spark-2.12.version>
-        <json4s.version>${json4s.spark-2.11.version}</json4s.version>
+        <json4s.version>3.6.6</json4s.version>
         <spark.bin.download.url>
-          https://archive.apache.org/dist/spark/spark-3.0.0/spark-3.0.0-bin-hadoop2.7.tgz
+          https://archive.apache.org/dist/spark/spark-3.1.1/spark-3.1.1-bin-hadoop2.7.tgz
         </spark.bin.download.url>
-        <spark.bin.name>spark-3.0.0-bin-hadoop2.7</spark.bin.name>
+        <spark.bin.name>spark-3.1.1-bin-hadoop2.7</spark.bin.name>
       </properties>
     </profile>
 
@@ -1121,7 +1112,8 @@
               <sortArtifactByName>true</sortArtifactByName>
               <fileTemplate>${execution.root}/dev/third-party-file.ftl</fileTemplate>
               <useMissingFile>true</useMissingFile>
-              <missingFile>${execution.root}/dev/third-party-missing-license.properties</missingFile>
+              <missingFile>${execution.root}/dev/third-party-missing-license.properties
+              </missingFile>
             </configuration>
             <executions>
               <execution>
@@ -1150,7 +1142,8 @@
             <artifactId>maven-javadoc-plugin</artifactId>
             <configuration>
               <failOnError>true</failOnError>
-              <excludePackageNames>*.test,*.example,*.client,*.annotations,*.rsc</excludePackageNames>
+              <excludePackageNames>*.test,*.example,*.client,*.annotations,*.rsc
+              </excludePackageNames>
             </configuration>
           </plugin>
         </plugins>

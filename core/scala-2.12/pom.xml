@@ -30,7 +30,6 @@
   </parent>
 
   <properties>
-    <scala.version>${scala-2.12.version}</scala.version>
     <scala.binary.version>2.12</scala.binary.version>
   </properties>
 
