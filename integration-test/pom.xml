@@ -220,6 +220,7 @@
             <goals>
               <goal>wget</goal>
             </goals>
+            <phase>test</phase>
             <configuration>
               <readTimeOut>60000</readTimeOut>
               <retries>5</retries>

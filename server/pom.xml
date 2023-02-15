@@ -215,6 +215,22 @@
     </dependency>
 
     <dependency>
+      <groupId>org.scala-lang</groupId>
+      <artifactId>scala-compiler</artifactId>
+      <version>${scala.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.sun.jersey</groupId>
+      <artifactId>jersey-core</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>javax.ws.rs</groupId>
+      <artifactId>jsr311-api</artifactId>
+    </dependency>
+
+    <dependency>
       <groupId>org.apache.livy</groupId>
       <artifactId>livy-repl_${scala.binary.version}</artifactId>
       <version>${project.version}</version>
